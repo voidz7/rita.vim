@@ -1,0 +1,17 @@
+
+rita.vim
+------
+
+rita is a minimal vim colorscheme 
+
+Install
+-------
+
+Install using `plug`
+
+    Plug 'voidz7/rita.vim'
+
+Set rita in ur `vimrc` or `init.vim`
+
+    colorscheme rita
+
