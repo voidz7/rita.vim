@@ -1,180 +1,260 @@
-highlight clear
-set background=dark
-
-if exists("syntax_on")
-    syntax reset
+if !has('gui_running') && &t_Co < 256
+  finish
 endif
 
-let g:colors_name = "rita"
-
-let s:cterm = {}
-
-let s:cterm.none = { "default": "NONE" }
-let s:cterm.background = { "default": "0" }
-let s:cterm.red = { "default": "1" }
-let s:cterm.green = { "default": "2" }
-let s:cterm.yellow = { "default": "3" }
-let s:cterm.blue = { "default": "4" }
-let s:cterm.magenta = { "default": "5" }
-let s:cterm.cyan = { "default": "6" }
-let s:cterm.foreground = { "default": "7" }
-let s:cterm.black = { "default": "8" }
-
-function! s:hi(group, ctermfg, ctermbg, attr)
-    if s:cterm(a:ctermfg) != ""
-        exec "hi " . a:group . " ctermfg=" . s:cterm(a:ctermfg)
-    endif
-    if s:cterm(a:ctermbg) != ""
-        exec "hi " . a:group . " ctermbg=" . s:cterm(a:ctermbg)
-    endif
-    if a:attr != ""
-        exec "hi " . a:group . " cterm=" . a:attr
-    endif
-endfunction
-
-function! s:cterm(color)
-    return a:color["default"]
-endfunction
-
-" Neovim terminal colors
-if has("nvim")
-    let g:terminal_color_0 = s:cterm(s:cterm.background)
-    let g:terminal_color_1 = s:cterm(s:cterm.red)
-    let g:terminal_color_2 = s:cterm(s:cterm.green)
-    let g:terminal_color_3 = s:cterm(s:cterm.yellow)
-    let g:terminal_color_4 = s:cterm(s:cterm.blue)
-    let g:terminal_color_5 = s:cterm(s:cterm.magenta)
-    let g:terminal_color_6 = s:cterm(s:cterm.cyan)
-    let g:terminal_color_7 = s:cterm(s:cterm.foreground)
-    let g:terminal_color_8 = s:cterm(s:cterm.black)
-    let g:terminal_color_9 = s:cterm(s:cterm.red)
-    let g:terminal_color_10 = s:cterm(s:cterm.green)
-    let g:terminal_color_11 = s:cterm(s:cterm.yellow)
-    let g:terminal_color_12 = s:cterm(s:cterm.blue)
-    let g:terminal_color_13 = s:cterm(s:cterm.magenta)
-    let g:terminal_color_14 = s:cterm(s:cterm.cyan)
-    let g:terminal_color_15 = s:cterm(s:cterm.foreground)
+hi clear
+if exists('syntax_on')
+  syntax reset
 endif
 
-" Editor colors
-call s:hi("User1", s:cterm.background, s:cterm.foreground, "")
-call s:hi("User2", s:cterm.foreground, s:cterm.background, "")
-call s:hi("User3", s:cterm.background, s:cterm.black, "")
-call s:hi("User4", s:cterm.black, s:cterm.background, "")
-call s:hi("User5", s:cterm.background, s:cterm.background, "")
+let g:colors_name = 'rita'
+hi Normal ctermbg=234 ctermfg=252 guibg=#161821 guifg=#c6c8d1
+hi ColorColumn cterm=NONE ctermbg=235 ctermfg=NONE guibg=#1e2132 guifg=NONE
+hi CursorColumn cterm=NONE ctermbg=235 ctermfg=NONE guibg=#1e2132 guifg=NONE
+hi CursorLine cterm=NONE ctermbg=235 ctermfg=NONE guibg=#1e2132 guifg=NONE
+hi Comment ctermfg=242 guifg=#6b7089
+hi Conceal ctermbg=234 ctermfg=242 guibg=#161821 guifg=#6b7089
+hi Constant ctermfg=140 guifg=#a093c7
+hi Cursor ctermbg=252 ctermfg=234 guibg=#c6c8d1 guifg=#161821
+hi CursorLineNr cterm=NONE ctermbg=237 ctermfg=253 guibg=#2a3158 guifg=#cdd1e6
+hi Delimiter ctermfg=252 guifg=#c6c8d1
+hi DiffAdd ctermbg=29 ctermfg=158 guibg=#45493e guifg=#c0c5b9
+hi DiffChange ctermbg=23 ctermfg=159 guibg=#384851 guifg=#b3c3cc
+hi DiffDelete cterm=NONE ctermbg=95 ctermfg=224 gui=NONE guibg=#53343b guifg=#ceb0b6
+hi DiffText cterm=NONE ctermbg=30 ctermfg=195 gui=NONE guibg=#5b7881 guifg=#c6c8d1
+hi Directory ctermfg=109 guifg=#89b8c2
+hi Error ctermbg=234 ctermfg=203 guibg=#161821 guifg=#e27878
+hi ErrorMsg ctermbg=234 ctermfg=203 guibg=#161821 guifg=#e27878
+hi WarningMsg ctermbg=234 ctermfg=203 guibg=#161821 guifg=#e27878
+hi EndOfBuffer ctermfg=236 guifg=#242940
+hi NonText ctermfg=236 guifg=#242940
+hi Whitespace ctermfg=236 guifg=#242940
+hi Folded ctermbg=235 ctermfg=245 guibg=#1e2132 guifg=#686f9a
+hi FoldColumn ctermbg=235 ctermfg=239 guibg=#1e2132 guifg=#444b71
+hi Function ctermfg=110 guifg=#84a0c6
+hi Identifier cterm=NONE ctermfg=109 guifg=#89b8c2
+hi Ignore ctermbg=NONE ctermfg=NONE guibg=NONE guifg=NONE
+hi Include ctermfg=110 guifg=#84a0c6
+hi IncSearch cterm=reverse ctermfg=NONE gui=reverse guifg=NONE term=reverse
+hi LineNr ctermbg=235 ctermfg=239 guibg=#1e2132 guifg=#444b71
+hi MatchParen ctermbg=237 ctermfg=255 guibg=#3e445e guifg=#ffffff
+hi ModeMsg ctermfg=242 guifg=#6b7089
+hi MoreMsg ctermfg=150 guifg=#b4be82
+hi Operator ctermfg=110 guifg=#84a0c6
+hi Pmenu ctermbg=236 ctermfg=251 guibg=#3d425b guifg=#c6c8d1
+hi PmenuSbar ctermbg=236 ctermfg=NONE guibg=#3d425b guifg=NONE
+hi PmenuSel ctermbg=240 ctermfg=255 guibg=#5b6389 guifg=#eff0f4
+hi PmenuThumb ctermbg=251 ctermfg=NONE guibg=#c6c8d1 guifg=NONE
+hi PreProc ctermfg=150 guifg=#b4be82
+hi Question ctermfg=150 guifg=#b4be82
+hi QuickFixLine ctermbg=236 ctermfg=252 guibg=#272c42 guifg=#c6c8d1
+hi Search ctermbg=216 ctermfg=234 guibg=#e4aa80 guifg=#392313
+hi SignColumn ctermbg=235 ctermfg=239 guibg=#1e2132 guifg=#444b71
+hi Special ctermfg=150 guifg=#b4be82
+hi SpecialKey ctermfg=240 guifg=#515e97
+hi SpellBad ctermbg=95 ctermfg=252 gui=undercurl guifg=NONE guisp=#e27878
+hi SpellCap ctermbg=24 ctermfg=252 gui=undercurl guifg=NONE guisp=#84a0c6
+hi SpellLocal ctermbg=23 ctermfg=252 gui=undercurl guifg=NONE guisp=#89b8c2
+hi SpellRare ctermbg=97 ctermfg=252 gui=undercurl guifg=NONE guisp=#a093c7
+hi Statement ctermfg=110 gui=NONE guifg=#84a0c6
+hi StatusLine cterm=reverse ctermbg=234 ctermfg=245 gui=reverse guibg=#17171b guifg=#818596 term=reverse
 
-" Statusline colors
-call s:hi("StatusLine", s:cterm.yellow, s:cterm.background, "NONE")
-call s:hi("StatusLineNC", s:cterm.black, s:cterm.background, "NONE")
-call s:hi("StatusLineTerm", s:cterm.background, s:cterm.background, "NONE")
-call s:hi("StatusLineTemrNC", s:cterm.black, s:cterm.background, "NONE")
+hi StatusLineTerm cterm=reverse ctermbg=234 ctermfg=245 gui=reverse guibg=#17171b guifg=#818596 term=reverse
+hi StatusLineNC cterm=reverse ctermbg=238 ctermfg=233 gui=reverse guibg=#3e445e guifg=#0f1117
+hi StatusLineTermNC cterm=reverse ctermbg=238 ctermfg=233 gui=reverse guibg=#3e445e guifg=#0f1117
+hi StorageClass ctermfg=110 guifg=#84a0c6
+hi String ctermfg=109 guifg=#89b8c2
+hi Structure ctermfg=110 guifg=#84a0c6
+hi TabLine cterm=NONE ctermbg=233 ctermfg=238 gui=NONE guibg=#0f1117 guifg=#3e445e
+hi TabLineFill cterm=reverse ctermbg=238 ctermfg=233 gui=reverse guibg=#3e445e guifg=#0f1117
+hi TabLineSel cterm=NONE ctermbg=234 ctermfg=252 gui=NONE guibg=#161821 guifg=#9a9ca5
+hi TermCursorNC ctermbg=242 ctermfg=234 guibg=#6b7089 guifg=#161821
+hi Title ctermfg=216 gui=NONE guifg=#e2a478
+hi Todo ctermbg=234 ctermfg=150 guibg=#45493e guifg=#b4be82
+hi Type ctermfg=110 gui=NONE guifg=#84a0c6
+hi Underlined cterm=underline ctermfg=110 gui=underline guifg=#84a0c6 term=underline
+hi VertSplit cterm=NONE ctermbg=233 ctermfg=233 gui=NONE guibg=#0f1117 guifg=#0f1117
+hi Visual ctermbg=236 ctermfg=NONE guibg=#272c42 guifg=NONE
+hi VisualNOS ctermbg=236 ctermfg=NONE guibg=#272c42 guifg=NONE
+hi WildMenu ctermbg=255 ctermfg=234 guibg=#d4d5db guifg=#17171b
+hi diffAdded ctermfg=150 guifg=#b4be82
+hi diffRemoved ctermfg=203 guifg=#e27878
+hi ALEErrorSign ctermbg=235 ctermfg=203 guibg=#1e2132 guifg=#e27878
+hi ALEWarningSign ctermbg=235 ctermfg=216 guibg=#1e2132 guifg=#e2a478
+hi ALEVirtualTextError ctermfg=203 guifg=#e27878
+hi ALEVirtualTextWarning ctermfg=216 guifg=#e2a478
+hi CtrlPMode1 ctermbg=236 ctermfg=242 guibg=#2e313f guifg=#6b7089
+hi EasyMotionShade ctermfg=239 guifg=#3d425b
+hi EasyMotionTarget ctermfg=150 guifg=#b4be82
+hi EasyMotionTarget2First ctermfg=216 guifg=#e2a478
+hi EasyMotionTarget2Second ctermfg=216 guifg=#e2a478
+hi GitGutterAdd ctermbg=235 ctermfg=150 guibg=#1e2132 guifg=#b4be82
+hi GitGutterChange ctermbg=235 ctermfg=109 guibg=#1e2132 guifg=#89b8c2
+hi GitGutterChangeDelete ctermbg=235 ctermfg=109 guibg=#1e2132 guifg=#89b8c2
+hi GitGutterDelete ctermbg=235 ctermfg=203 guibg=#1e2132 guifg=#e27878
+hi gitmessengerEndOfBuffer ctermbg=235 ctermfg=239 guibg=#1e2132 guifg=#444b71
+hi gitmessengerPopupNormal ctermbg=235 ctermfg=252 guibg=#1e2132 guifg=#c6c8d1
+hi Sneak ctermbg=140 ctermfg=234 guibg=#a093c7 guifg=#161821
+hi SneakScope ctermbg=236 ctermfg=242 guibg=#272c42 guifg=#6b7089
+hi SyntasticErrorSign ctermbg=235 ctermfg=203 guibg=#1e2132 guifg=#e27878
+hi SyntasticStyleErrorSign ctermbg=235 ctermfg=203 guibg=#1e2132 guifg=#e27878
+hi SyntasticStyleWarningSign ctermbg=235 ctermfg=216 guibg=#1e2132 guifg=#e2a478
+hi SyntasticWarningSign ctermbg=235 ctermfg=216 guibg=#1e2132 guifg=#e2a478
+hi ZenSpace ctermbg=203 guibg=#e27878
+hi icebergALAccentRed ctermfg=203 guifg=#e27878
 
-" Ale colors
-call s:hi("ALEInfoSign", s:cterm.black, s:cterm.none, "")
-call s:hi("ALEErrorSign", s:cterm.black, s:cterm.none, "")
-call s:hi("ALEWarningSign", s:cterm.black, s:cterm.none, "")
-call s:hi("ALEStyleErrorSign", s:cterm.black, s:cterm.none, "")
-call s:hi("ALEStyleWarningSign", s:cterm.black, s:cterm.none, "")
-call s:hi("ALEInfoLine", s:cterm.black, s:cterm.none, "")
-call s:hi("ALEErrorLine", s:cterm.black, s:cterm.none, "")
-call s:hi("ALEWarningLine", s:cterm.black, s:cterm.none, "")
+if has('nvim')
+  let g:terminal_color_0 = '#1e2132'
+  let g:terminal_color_1 = '#e27878'
+  let g:terminal_color_2 = '#b4be82'
+  let g:terminal_color_3 = '#e2a478'
+  let g:terminal_color_4 = '#84a0c6'
+  let g:terminal_color_5 = '#a093c7'
+  let g:terminal_color_6 = '#89b8c2'
+  let g:terminal_color_7 = '#c6c8d1'
+  let g:terminal_color_8 = '#6b7089'
+  let g:terminal_color_9 = '#e98989'
+  let g:terminal_color_10 = '#c0ca8e'
+  let g:terminal_color_11 = '#e9b189'
+  let g:terminal_color_12 = '#91acd1'
+  let g:terminal_color_13 = '#ada0d3'
+  let g:terminal_color_14 = '#95c4ce'
+  let g:terminal_color_15 = '#d2d4de'
+else
+    let g:terminal_ansi_colors = ['#1e2132', '#e27878', '#b4be82', '#e2a478', '#84a0c6', '#a093c7', '#89b8c2', '#c6c8d1', '#6b7089', '#e98989', '#c0ca8e', '#e9b189', '#91acd1', '#ada0d3', '#95c4ce', '#d2d4de']
+endif
 
-" Defaults
-call s:hi("EndOfBuffer", s:cterm.background, "", "")
-call s:hi("SpecialKey", s:cterm.black, "", "")
-call s:hi("ColorColumn", s:cterm.foreground, s:cterm.black, "")
-call s:hi("Cursor", s:cterm.foreground, "", "")
-call s:hi("CursorColumn", s:cterm.none, s:cterm.none, "")
-call s:hi("SignColumn", s:cterm.red, s:cterm.none, "")
-call s:hi("LineNr", s:cterm.black, s:cterm.none, "")
-call s:hi("CursorLine", s:cterm.none, s:cterm.background, "NONE")
-call s:hi("CursorLineNr", s:cterm.foreground, s:cterm.none, "NONE")
-call s:hi("Directory", s:cterm.blue, "", "")
-call s:hi("FoldColumn", "", s:cterm.none, "")
-call s:hi("Folded", s:cterm.background, s:cterm.black, "")
-call s:hi("PMenu", s:cterm.background, s:cterm.black, "")
-call s:hi("PMenuSel", s:cterm.background, s:cterm.foreground, "")
-call s:hi("ErrorMsg", s:cterm.red, s:cterm.none, "")
-call s:hi("Error", s:cterm.red, s:cterm.none, "")
-call s:hi("WarningMsg", s:cterm.yellow, "", "")
-call s:hi("SpellBad", s:cterm.red, s:cterm.none, "NONE")
-call s:hi("VertSplit", s:cterm.black, s:cterm.none, "NONE")
-call s:hi("Conceal", s:cterm.black, s:cterm.none, "")
+hi! link TermCursor Cursor
+hi! link ToolbarButton TabLineSel
+hi! link ToolbarLine TabLineFill
+hi! link cssBraces Delimiter
+hi! link cssClassName Special
+hi! link cssClassNameDot Normal
+hi! link cssPseudoClassId Special
+hi! link cssTagName Statement
+hi! link helpHyperTextJump Constant
+hi! link htmlArg Constant
+hi! link htmlEndTag Statement
+hi! link htmlTag Statement
+hi! link jsonQuote Normal
+hi! link phpVarSelector Identifier
+hi! link pythonFunction Title
+hi! link rubyDefine Statement
+hi! link rubyFunction Title
+hi! link rubyInterpolationDelimiter String
+hi! link rubySharpBang Comment
+hi! link rubyStringDelimiter String
+hi! link rustFuncCall Normal
+hi! link rustFuncName Title
+hi! link rustType Constant
+hi! link sassClass Special
+hi! link shFunction Normal
+hi! link vimContinue Comment
+hi! link vimFuncSID vimFunction
+hi! link vimFuncVar Normal
+hi! link vimFunction Title
+hi! link vimGroup Statement
+hi! link vimHiGroup Statement
+hi! link vimHiTerm Identifier
+hi! link vimMapModKey Special
+hi! link vimOption Identifier
+hi! link vimVar Normal
+hi! link xmlAttrib Constant
+hi! link xmlAttribPunct Statement
+hi! link xmlEndTag Statement
+hi! link xmlNamespace Statement
+hi! link xmlTag Statement
+hi! link xmlTagName Statement
+hi! link yamlKeyValueDelimiter Delimiter
+hi! link CtrlPPrtCursor Cursor
+hi! link CtrlPMatch Title
+hi! link CtrlPMode2 StatusLine
+hi! link deniteMatched Normal
+hi! link deniteMatchedChar Title
+hi! link elixirBlockDefinition Statement
+hi! link elixirDefine Statement
+hi! link elixirDocSigilDelimiter String
+hi! link elixirDocTest String
+hi! link elixirExUnitMacro Statement
+hi! link elixirExceptionDefine Statement
+hi! link elixirFunctionDeclaration Title
+hi! link elixirKeyword Statement
+hi! link elixirModuleDeclaration Normal
+hi! link elixirModuleDefine Statement
+hi! link elixirPrivateDefine Statement
+hi! link elixirStringDelimiter String
+hi! link jsFlowMaybe Normal
+hi! link jsFlowObject Normal
+hi! link jsFlowType PreProc
+hi! link graphqlName Normal
+hi! link graphqlOperator Normal
+hi! link gitmessengerHash Comment
+hi! link gitmessengerHeader Statement
+hi! link gitmessengerHistory Constant
+hi! link jsArrowFunction Operator
+hi! link jsClassDefinition Normal
+hi! link jsClassFuncName Title
+hi! link jsExport Statement
+hi! link jsFuncName Title
+hi! link jsFutureKeys Statement
+hi! link jsFuncCall Normal
+hi! link jsGlobalObjects Statement
+hi! link jsModuleKeywords Statement
+hi! link jsModuleOperators Statement
+hi! link jsNull Constant
+hi! link jsObjectFuncName Title
+hi! link jsObjectKey Identifier
+hi! link jsSuper Statement
+hi! link jsTemplateBraces Special
+hi! link jsUndefined Constant
+hi! link markdownBold Special
+hi! link markdownCode String
+hi! link markdownCodeDelimiter String
+hi! link markdownHeadingDelimiter Comment
+hi! link markdownRule Comment
+hi! link ngxDirective Statement
+hi! link plug1 Normal
+hi! link plug2 Identifier
+hi! link plugDash Comment
+hi! link plugMessage Special
+hi! link SignifySignAdd GitGutterAdd
+hi! link SignifySignChange GitGutterChange
+hi! link SignifySignChangeDelete GitGutterChangeDelete
+hi! link SignifySignDelete GitGutterDelete
+hi! link SignifySignDeleteFirstLine SignifySignDelete
+hi! link StartifyBracket Comment
+hi! link StartifyFile Identifier
+hi! link StartifyFooter Constant
+hi! link StartifyHeader Constant
+hi! link StartifyNumber Special
+hi! link StartifyPath Comment
+hi! link StartifySection Statement
+hi! link StartifySlash Comment
+hi! link StartifySpecial Normal
+hi! link svssBraces Delimiter
+hi! link swiftIdentifier Normal
+hi! link typescriptAjaxMethods Normal
+hi! link typescriptBraces Normal
+hi! link typescriptEndColons Normal
+hi! link typescriptFuncKeyword Statement
+hi! link typescriptGlobalObjects Statement
+hi! link typescriptHtmlElemProperties Normal
+hi! link typescriptIdentifier Statement
+hi! link typescriptMessage Normal
+hi! link typescriptNull Constant
+hi! link typescriptParens Normal
 
-" Diffs
-call s:hi("DiffAdded", s:cterm.green, "", "")
-call s:hi("DiffRemoved", s:cterm.red, "", "")
-call s:hi("DiffAdd", s:cterm.green, s:cterm.cyan, "")
-call s:hi("DiffChange", s:cterm.foreground, s:cterm.cyan, "")
-call s:hi("DiffDelete", s:cterm.red, s:cterm.black, "")
-call s:hi("DiffText", s:cterm.background, s:cterm.black, "")
+if !has('nvim')
+  hi! link SpecialKey Whitespace
+endif
 
-" Misc
-call s:hi("NonText", s:cterm.black, "", "NONE")
-call s:hi("helpExample", s:cterm.blue, "", "")
-call s:hi("MatchParen", s:cterm.background, s:cterm.black, "")
-call s:hi("Title", s:cterm.cyan, "", "")
-call s:hi("Comment", s:cterm.black, "", "")
-call s:hi("String", s:cterm.blue, "", "")
-call s:hi("Normal", s:cterm.foreground, s:cterm.none, "")
-call s:hi("Visual", s:cterm.background, s:cterm.foreground, "")
-call s:hi("Constant", s:cterm.blue, "", "")
-call s:hi("Type", s:cterm.blue, "", "")
-call s:hi("Define", s:cterm.cyan, "", "")
-call s:hi("Statement", s:cterm.blue, "", "")
-call s:hi("Function", s:cterm.magenta, "", "")
-call s:hi("Conditional", s:cterm.cyan, "", "")
-call s:hi("Float", s:cterm.yellow, "", "")
-call s:hi("Noise", s:cterm.cyan, "", "")
-call s:hi("Number", s:cterm.yellow, "", "")
-call s:hi("Identifier", s:cterm.blue, "", "")
-call s:hi("Operator", s:cterm.cyan, "", "")
-call s:hi("PreProc", s:cterm.blue, "", "")
-call s:hi("Search", s:cterm.background, s:cterm.foreground, "")
-call s:hi("IncSearch", s:cterm.background, s:cterm.foreground, "")
-call s:hi("Todo", s:cterm.background, "", "")
+hi! link StatusLine  WildMenu
 
-" TypeScript
-call s:hi("typescriptImport", s:cterm.red, "", "")
-call s:hi("typescriptExport", s:cterm.red, "", "")
-call s:hi("typescriptAssign", s:cterm.cyan, "", "")
-call s:hi("typescriptVariable", s:cterm.red, "", "")
-call s:hi("typescriptTypeBrackets", s:cterm.cyan, "", "")
-call s:hi("typescriptTypeQuery", s:cterm.red, "", "")
-call s:hi("typescriptFuncName", s:cterm.magenta, "", "")
-call s:hi("typescriptRegExpMethod", s:cterm.magenta, "", "")
-call s:hi("typescriptRegexpString", s:cterm.blue, "", "")
-call s:hi("typescriptMember", s:cterm.cyan, "", "")
-call s:hi("typescriptObjectStaticMethod", s:cterm.magenta, "", "")
-call s:hi("typescriptBoolean", s:cterm.cyan, "", "")
-call s:hi("typescriptObjectLabel", s:cterm.cyan, "", "")
-call s:hi("typescriptObjectLiteral", s:cterm.cyan, "", "")
-call s:hi("typescriptStringProperty", s:cterm.blue, "", "")
-call s:hi("typescriptInterfaceKeyword", s:cterm.red, "", "")
-call s:hi("typescriptTemplate", s:cterm.blue, "", "")
-call s:hi("typescriptConditional", s:cterm.red, "", "")
-call s:hi("typescriptUnaryOp", s:cterm.cyan, "", "")
-call s:hi("typescriptAsyncFuncKeyword", s:cterm.red, "", "")
-call s:hi("typescriptBOMLocationMethod", s:cterm.magenta, "", "")
-call s:hi("typescriptDOMFormProp", s:cterm.cyan, "", "")
-call s:hi("typescriptArrayMethod", s:cterm.magenta, "", "")
-call s:hi("typescriptStringMethod", s:cterm.magenta, "", "")
+hi! link StatusLineNC WildMenu
 
-" TSX/JSX
-call s:hi("jsxOpenPunct", s:cterm.cyan, "", "")
-call s:hi("jsxClosePunct", s:cterm.cyan, "", "")
-call s:hi("jsxTagName", s:cterm.green, "", "")
-call s:hi("jsxEqual", s:cterm.cyan, "", "")
-call s:hi("jsxComponentName", s:cterm.foreground, "", "")
-call s:hi("jsxAttrib", s:cterm.cyan, "", "")
-call s:hi("jsxString", s:cterm.blue, "", "")
-call s:hi("jsxBraces", s:cterm.foreground, "", "")
+hi! link StatusLineTerm WildMenu
 
-" NERDTree
-call s:hi("NERDTreeOpenable",                  s:cterm.black,            s:cterm.none,             "")
-call s:hi("NERDTreeClosable",                  s:cterm.black,            s:cterm.none,             "")
-call s:hi("NERDTreeCWD",                       s:cterm.foreground,       s:cterm.none,             "")
-call s:hi("NERDTreeDir",                       s:cterm.black,            s:cterm.none,             "")
-call s:hi("NERDTreeDirSlash",                  s:cterm.background,       s:cterm.none,             "")
-call s:hi("NERDTreeExecFile",                  s:cterm.red,              s:cterm.none,             "")
+hi! link StatusLineTermNC WildMenu
 
+
+set termguicolors
