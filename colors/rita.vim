@@ -1,315 +1,413 @@
-highlight clear
-set background=dark
+set termguicolors
 
-if exists("syntax_on")
-    syntax reset
+let s:gui00        = "0f0f0f"
+let g:base16_gui00 = "0f0f0f"
+
+let s:gui01        = "191919"
+let g:base16_gui01 = "191919"
+
+let s:gui02        = "262626"
+let g:base16_gui02 = "262626"
+
+let s:gui03        = "4c4c4c"
+let g:base16_gui03 = "4c4c4c"
+
+let s:gui04        = "ac8a8c"
+let g:base16_gui04 = "ac8a8c"
+
+let s:gui05        = "f0f0f0"
+let g:base16_gui05 = "f0f0f0"
+
+let s:gui06        = "e7e7e7"
+let g:base16_gui06 = "e7e7e7"
+
+let s:gui07        = "f0f0f0"
+let g:base16_gui07 = "f0f0f0"
+" red
+let s:gui08        = "ac8a8c"
+let g:base16_gui08 = "ac8a8c"
+" orange
+let s:gui09        = "c6a679"
+let g:base16_gui09 = "ceb188"
+" yellow
+let s:gui0A        = "aca98a"
+let g:base16_gui0A = "aca98a"
+" green
+let s:gui0B        = "8aac8b"
+let g:base16_gui0B = "8aac8b"
+" cyan
+let s:gui0C        = "8aabac"
+let g:base16_gui0C = "8aabac"
+" blue
+let s:gui0D        = "8f8aac"
+let g:base16_gui0D = "8f8aac"
+" magenta
+let s:gui0E        = "ac8aac"
+let g:base16_gui0E = "ac8aac"
+" dark red
+let s:gui0F        = "ac8a8c"
+let g:base16_gui0F = "ac8a8c"
+
+" Terminal color definitions
+let s:cterm00        = "00"
+let g:base16_cterm00 = "00"
+let s:cterm03        = "08"
+let g:base16_cterm03 = "08"
+let s:cterm05        = "07"
+let g:base16_cterm05 = "07"
+let s:cterm07        = "15"
+let g:base16_cterm07 = "15"
+let s:cterm08        = "01"
+let g:base16_cterm08 = "01"
+let s:cterm0A        = "03"
+let g:base16_cterm0A = "03"
+let s:cterm0B        = "02"
+let g:base16_cterm0B = "02"
+let s:cterm0C        = "06"
+let g:base16_cterm0C = "06"
+let s:cterm0D        = "04"
+let g:base16_cterm0D = "04"
+let s:cterm0E        = "05"
+let g:base16_cterm0E = "05"
+if exists("base16colorspace") && base16colorspace == "256"
+  let s:cterm01        = "18"
+  let g:base16_cterm01 = "18"
+  let s:cterm02        = "19"
+  let g:base16_cterm02 = "19"
+  let s:cterm04        = "20"
+  let g:base16_cterm04 = "20"
+  let s:cterm06        = "21"
+  let g:base16_cterm06 = "21"
+  let s:cterm09        = "16"
+  let g:base16_cterm09 = "16"
+  let s:cterm0F        = "17"
+  let g:base16_cterm0F = "17"
+else
+  let s:cterm01        = "10"
+  let g:base16_cterm01 = "10"
+  let s:cterm02        = "11"
+  let g:base16_cterm02 = "11"
+  let s:cterm04        = "12"
+  let g:base16_cterm04 = "12"
+  let s:cterm06        = "13"
+  let g:base16_cterm06 = "13"
+  let s:cterm09        = "09"
+  let g:base16_cterm09 = "09"
+  let s:cterm0F        = "14"
+  let g:base16_cterm0F = "14"
 endif
 
-let g:colors_name = "rita"
-
-let s:cterm = {}
-
-let s:cterm.none            = { "default": "NONE" }
-let s:cterm.background      = { "default": "0" }
-let s:cterm.red_dim         = { "default": "1" }
-let s:cterm.green_dim       = { "default": "2" }
-let s:cterm.yellow_dim      = { "default": "3" }
-let s:cterm.blue_dim        = { "default": "4" }
-let s:cterm.magenta_dim     = { "default": "5" }
-let s:cterm.cyan_dim        = { "default": "6" }
-let s:cterm.white_dim       = { "default": "7" }
-let s:cterm.black           = { "default": "8" }
-let s:cterm.red_bright      = { "default": "9" }
-let s:cterm.green_bright    = { "default": "10" }
-let s:cterm.yellow_bright   = { "default": "11" }
-let s:cterm.blue_bright     = { "default": "12" }
-let s:cterm.magenta_bright  = { "default": "13" }
-let s:cterm.cyan_bright     = { "default": "14" }
-let s:cterm.white_bright    = { "default": "15" }
-
-function! s:hi(group, ctermfg, ctermbg, attr)
-    if s:cterm(a:ctermfg) != ""
-        exec "hi " . a:group . " ctermfg=" . s:cterm(a:ctermfg)
-    endif
-    if s:cterm(a:ctermbg) != ""
-        exec "hi " . a:group . " ctermbg=" . s:cterm(a:ctermbg)
-    endif
-    if a:attr != ""
-        exec "hi " . a:group . " cterm=" . a:attr
-    endif
-endfunction
-
-function! s:cterm(color)
-    return a:color["default"]
-endfunction
-
-" Neovim terminal colors
+" Neovim terminal colours
 if has("nvim")
-    let g:terminal_color_0  = s:cterm(s:cterm.background)
-    let g:terminal_color_1  = s:cterm(s:cterm.red_dim)
-    let g:terminal_color_2  = s:cterm(s:cterm.green_dim)
-    let g:terminal_color_3  = s:cterm(s:cterm.yellow_dim)
-    let g:terminal_color_4  = s:cterm(s:cterm.blue_dim)
-    let g:terminal_color_5  = s:cterm(s:cterm.magenta_dim)
-    let g:terminal_color_6  = s:cterm(s:cterm.cyan_dim)
-    let g:terminal_color_7  = s:cterm(s:cterm.white_dim)
-    let g:terminal_color_8  = s:cterm(s:cterm.black)
-    let g:terminal_color_9  = s:cterm(s:cterm.red_bright)
-    let g:terminal_color_10 = s:cterm(s:cterm.green_bright)
-    let g:terminal_color_11 = s:cterm(s:cterm.yellow_bright)
-    let g:terminal_color_12 = s:cterm(s:cterm.blue_bright)
-    let g:terminal_color_13 = s:cterm(s:cterm.magenta_bright)
-    let g:terminal_color_14 = s:cterm(s:cterm.cyan_bright)
-    let g:terminal_color_15 = s:cterm(s:cterm.white_bright)
+  let g:terminal_color_0 =  "#0f0f0f"
+  let g:terminal_color_1 =  "#AC8A8C"
+  let g:terminal_color_2 =  "#8AAC8B"
+  let g:terminal_color_3 =  "#ACA98A"
+  let g:terminal_color_4 =  "#8F8AAC"
+  let g:terminal_color_5 =  "#AC8AAC"
+  let g:terminal_color_6 =  "#8AABAC"
+  let g:terminal_color_7 =  "#e7e7e7"
+  let g:terminal_color_8 =  "#676767"
+  let g:terminal_color_9 =  "#AC8A8C"
+  let g:terminal_color_10 = "#8AAC8B"
+  let g:terminal_color_11 = "#ACA98A"
+  let g:terminal_color_12 = "#8F8AAC"
+  let g:terminal_color_13 = "#AC8AAC"
+  let g:terminal_color_14 = "#8AABAC"
+  let g:terminal_color_15 = "#f0f0f0"
+  let g:terminal_color_background = g:terminal_color_0
+  let g:terminal_color_foreground = g:terminal_color_5
+  if &background == "light"
+    let g:terminal_color_background = g:terminal_color_7
+    let g:terminal_color_foreground = g:terminal_color_2
+  endif
+elseif has("terminal")
+  let g:terminal_ansi_colors = [
+        \ "#0f0f0f",
+        \ "#AC8A8C",
+        \ "#8AAC8B",
+        \ "#ACA98A",
+        \ "#8F8AAC",
+        \ "#AC8AAC",
+        \ "#8AABAC",
+        \ "#e7e7e7",
+        \ "#676767",
+        \ "#AC8A8C",
+        \ "#8AAC8B",
+        \ "#ACA98A",
+        \ "#8F8AAC",
+        \ "#AC8AAC",
+        \ "#8AABAC",
+        \ "#f0f0f0",
+        \ ]
 endif
 
-" Editor colors
-call s:hi("User1",                             s:cterm.background,       s:cterm.white_dim,        "")
-call s:hi("User2",                             s:cterm.white_dim,        s:cterm.background,       "")
-call s:hi("User3",                             s:cterm.background,       s:cterm.black,            "")
-call s:hi("User4",                             s:cterm.black,            s:cterm.background,       "")
-call s:hi("User5",                             s:cterm.background,       s:cterm.background,       "")
+" Theme setup
+hi clear
+syntax reset
+let g:colors_name = "mountain"
 
-" Statusline colors
-call s:hi("StatusLine",                        s:cterm.yellow_bright,    s:cterm.background,       "NONE")
-call s:hi("StatusLineNC",                      s:cterm.black,            s:cterm.background,       "NONE")
-call s:hi("StatusLineTerm",                    s:cterm.background,       s:cterm.background,       "NONE")
-call s:hi("StatusLineTemrNC",                  s:cterm.black,            s:cterm.background,       "NONE")
+" Highlighting function
+" Optional variables are attributes and guisp
+function! g:Base16hi(group, guifg, guibg, ctermfg, ctermbg, ...)
+  let l:attr = get(a:, 1, "")
+  let l:guisp = get(a:, 2, "")
 
-" Ale colors
-call s:hi("ALEInfoSign",                       s:cterm.black,            s:cterm.none,             "")
-call s:hi("ALEErrorSign",                      s:cterm.black,            s:cterm.none,             "")
-call s:hi("ALEWarningSign",                    s:cterm.black,            s:cterm.none,             "")
-call s:hi("ALEStyleErrorSign",                 s:cterm.black,            s:cterm.none,             "")
-call s:hi("ALEStyleWarningSign",               s:cterm.black,            s:cterm.none,             "")
-call s:hi("ALEInfoLine",                       s:cterm.black,            s:cterm.none,             "")
-call s:hi("ALEErrorLine",                      s:cterm.black,            s:cterm.none,             "")
-call s:hi("ALEWarningLine",                    s:cterm.black,            s:cterm.none,             "")
-
-call s:hi("EndOfBuffer",                       s:cterm.background,       "",                       "")
-call s:hi("SpecialKey",                        s:cterm.black,            "",                       "")
-call s:hi("ColorColumn",                       s:cterm.white_dim,        s:cterm.black,            "")
-call s:hi("Cursor",                            s:cterm.white_dim,        "",                       "")
-call s:hi("CursorColumn",                      s:cterm.none,             s:cterm.none,             "")
-call s:hi("SignColumn",                        s:cterm.red_dim,          s:cterm.none,             "")
-call s:hi("LineNr",                            s:cterm.black,            s:cterm.none,             "")
-call s:hi("CursorLine",                        s:cterm.none,             s:cterm.background,       "NONE")
-call s:hi("CursorLineNr",                      s:cterm.white_dim,        s:cterm.none,             "NONE")
-call s:hi("Directory",                         s:cterm.blue_dim,         "",                       "")
-call s:hi("FoldColumn",                        "",                       s:cterm.none,             "")
-call s:hi("Folded",                            s:cterm.background,       s:cterm.black,            "")
-call s:hi("PMenu",                             s:cterm.background,       s:cterm.black,            "")
-call s:hi("PMenuSel",                          s:cterm.background,       s:cterm.white_dim,        "")
-call s:hi("ErrorMsg",                          s:cterm.red_dim,          s:cterm.none,             "")
-call s:hi("Error",                             s:cterm.red_dim,          s:cterm.none,             "")
-call s:hi("WarningMsg",                        s:cterm.yellow_bright,    "",                       "")
-call s:hi("SpellBad",                          s:cterm.red_dim,          s:cterm.none,             "NONE")
-call s:hi("VertSplit",                         s:cterm.black,            s:cterm.none,             "NONE")
-call s:hi("Conceal",                           s:cterm.black,            s:cterm.none,             "")
-
-call s:hi("DiffAdded",                         s:cterm.green_dim,        "", "")
-call s:hi("DiffRemoved",                       s:cterm.red_dim,          "", "")
-
-call s:hi("DiffAdd",                           "",                       s:cterm.cyan_bright,      "")
-call s:hi("DiffChange",                        "",                       s:cterm.cyan_bright,      "")
-call s:hi("DiffDelete",                        s:cterm.red_dim,          s:cterm.black,            "")
-call s:hi("DiffText",                          s:cterm.background,       s:cterm.black,            "")
-
-call s:hi("NonText",                           s:cterm.black,            "",                       "NONE")
-call s:hi("helpExample",                       s:cterm.blue_dim,         "",                       "")
-call s:hi("MatchParen",                        s:cterm.background,       s:cterm.black,            "")
-call s:hi("Title",                             s:cterm.cyan_dim,         "",                       "")
-"call s:hi("Comment",                           s:cterm.black,            "",                       "BOLD,ITALIC")
-call s:hi("Comment",                           s:cterm.black,            "",                       "ITALIC")
-call s:hi("String",                            s:cterm.green_dim,        "",                       "")
-call s:hi("Normal",                            s:cterm.white_bright,     s:cterm.none,             "")
-call s:hi("Visual",                            s:cterm.background,       s:cterm.white_dim,        "")
-call s:hi("Constant",                          s:cterm.blue_bright,      "",                       "")
-call s:hi("Type",                              s:cterm.blue_dim,         "",                       "")
-call s:hi("Define",                            s:cterm.cyan_bright,      "",                       "")
-call s:hi("Statement",                         s:cterm.blue_dim,         "",                       "")
-call s:hi("Function",                          s:cterm.magenta_bright,   "",                       "")
-call s:hi("Conditional",                       s:cterm.cyan_dim,         "",                       "")
-call s:hi("Float",                             s:cterm.yellow_bright,    "",                       "")
-call s:hi("Noise",                             s:cterm.cyan_bright,      "",                       "")
-call s:hi("Number",                            s:cterm.yellow_bright,    "",                       "")
-call s:hi("Identifier",                        s:cterm.blue_dim,         "",                       "")
-call s:hi("Operator",                          s:cterm.cyan_dim,         "",                       "")
-call s:hi("PreProc",                           s:cterm.blue_dim,         "",                       "")
-call s:hi("Search",                            s:cterm.background,       s:cterm.yellow_dim,       "")
-call s:hi("IncSearch",                         s:cterm.background,       s:cterm.yellow_dim,       "")
-call s:hi("Todo",                              s:cterm.background,       "",                       "")
-call s:hi("Special",                           s:cterm.magenta_dim,      "",                       "")
-
-" JavaScript
-call s:hi("javaScriptParens",                  s:cterm.cyan_bright,      "",                       "")
-call s:hi("javaScriptBraces",                  s:cterm.cyan_bright,      "",                       "")
-call s:hi("javaScriptNumber",                  s:cterm.yellow_bright,    "",                       "")
-call s:hi("javaScriptReserved",                s:cterm.blue_dim,         "",                       "BOLD")
-call s:hi("javaScriptLabel",                   s:cterm.magenta_dim,      "",                       "")
-call s:hi("javaScriptBoolean",                 s:cterm.yellow_bright,    "",                       "")
-call s:hi("javaScriptCommentTodo",             s:cterm.black,            "",                       "BOLD,ITALIC")
-call s:hi("javaScriptStatement",               s:cterm.cyan_dim,         "",                       "BOLD")
-
-" TypeScript
-call s:hi("typescriptImport",                  s:cterm.magenta_dim,      "",                       "ITALIC")
-call s:hi("typescriptExport",                  s:cterm.magenta_bright,   "",                       "ITALIC")
-call s:hi("typescriptAssign",                  s:cterm.magenta_dim,      "",                       "")
-call s:hi("typescriptVariable",                s:cterm.cyan_bright,      "",                       "ITALIC")
-call s:hi("typescriptBOM",                     s:cterm.white_bright,     "",                       "BOLD")
-call s:hi("typescriptVariableDeclaration",     s:cterm.red_bright,       "",                       "BOLD")
-call s:hi("typescriptCastKeyword",             s:cterm.cyan_dim,         "",                       "")
-call s:hi("typescriptTypeBrackets",            s:cterm.cyan_dim,         "",                       "")
-call s:hi("typescriptTypeReference",           s:cterm.yellow_bright,    "",                       "BOLD,ITALIC")
-call s:hi("typescriptTypeAnnotation",          s:cterm.cyan_dim,         "",                       "")
-call s:hi("typescriptTypeArguments",           s:cterm.white_bright,     "",                       "")
-call s:hi("typescriptTypeQuery",               s:cterm.cyan_dim,         "",                       "ITALIC")
-call s:hi("typescriptBraces",                  s:cterm.magenta_bright,   "",                       "")
-call s:hi("typescriptParens",                  s:cterm.magenta_bright,   "",                       "")
-call s:hi("typescriptCall",                    s:cterm.white_dim,        "",                       "")
-call s:hi("typescriptDotAnnotation",           s:cterm.cyan_bright,      "",                       "")
-call s:hi("typescriptDotNotation",             s:cterm.cyan_bright,      "",                       "")
-call s:hi("typescriptDestructureVariable",     s:cterm.white_dim,        "",                       "")
-call s:hi("typescriptArrowFunc",               s:cterm.magenta_bright,   "",                       "")
-call s:hi("typescriptFuncType",                s:cterm.red_bright,       "",                       "")
-call s:hi("typescriptFuncCallArg",             s:cterm.white_dim,        "",                       "")
-call s:hi("typescriptFuncKeyword",             s:cterm.blue_bright,      "",                       "")
-call s:hi("typescriptFuncName",                s:cterm.red_bright,       "",                       "BOLD")
-call s:hi("typescriptParenExp",                s:cterm.white_dim,        "",                       "")
-call s:hi("typescriptEndColons",               s:cterm.cyan_bright,      "",                       "")
-call s:hi("typescriptMember",                  s:cterm.white_bright,     "",                       "")
-call s:hi("typescriptMemberOptionality",       s:cterm.magenta_dim,      "",                       "")
-call s:hi("typescriptPredefinedType",          s:cterm.yellow_dim,       "",                       "ITALIC")
-call s:hi("typescriptNumber",                  s:cterm.red_bright,       "",                       "")
-call s:hi("typescriptBoolean",                 s:cterm.red_bright,       "",                       "")
-call s:hi("typescriptNull",                    s:cterm.red_bright,       "",                       "")
-call s:hi("typescriptAccessibilityModifier",   s:cterm.blue_dim,         "",                       "")
-call s:hi("typescriptObjectLabel",             s:cterm.white_bright,     "",                       "")
-call s:hi("typescriptObjectLiteral",           s:cterm.cyan_dim,         "",                       "")
-call s:hi("typescriptObjectSpread",            s:cterm.magenta_dim,      "",                       "")
-call s:hi("typescriptObjectColon",             s:cterm.magenta_bright,   "",                       "")
-call s:hi("typescriptInterfaceKeyword",        s:cterm.cyan_bright,      "",                       "ITALIC")
-call s:hi("typescriptAliasKeyword",            s:cterm.cyan_bright,      "",                       "ITALIC")
-call s:hi("typescriptInterfaceName",           s:cterm.yellow_dim,       "",                       "BOLD,ITALIC")
-call s:hi("typescriptAliasDeclaration",        s:cterm.yellow_dim,       "",                       "BOLD,ITALIC")
-call s:hi("typescriptInterfaceHeritage",       s:cterm.yellow_dim,       "",                       "ITALIC")
-call s:hi("typescriptInterfaceExtends",        s:cterm.magenta_dim,      "",                       "")
-call s:hi("typescriptUnion",                   s:cterm.cyan_dim,         "",                       "")
-call s:hi("typescriptBranch",                  s:cterm.green_bright,     "",                       "")
-call s:hi("typescriptParamImpl",               s:cterm.cyan_dim,         "",                       "")
-call s:hi("typescriptTemplate",                s:cterm.green_dim,        "",                       "")
-call s:hi("typescriptTemplateSB",              s:cterm.cyan_bright,      "",                       "")
-call s:hi("typescriptTemplateSubstitution",    s:cterm.white_dim,        "",                       "")
-call s:hi("typescriptTernaryOp",               s:cterm.cyan_bright,      "",                       "ITALIC")
-call s:hi("typescriptBinaryOp",                s:cterm.cyan_bright,      "",                       "ITALIC")
-call s:hi("typescriptLineComment",             s:cterm.black,            "",                       "BOLD,ITALIC")
-call s:hi("typescriptComment",                 s:cterm.black,            "",                       "BOLD,ITALIC")
-call s:hi("typescriptDocComment",              s:cterm.black,            "",                       "BOLD,ITALIC")
-call s:hi("typescriptCommentTodo",             s:cterm.black,            "",                       "BOLD,ITALIC")
-call s:hi("typescriptGlobal",                  s:cterm.yellow_dim,       "",                       "")
-call s:hi("typescriptStatementKeyword",        s:cterm.cyan_dim,         "",                       "")
-call s:hi("typescriptConditional",             s:cterm.cyan_dim,         "",                       "")
-call s:hi("typescriptAsyncFuncKeyword",        s:cterm.magenta_dim,      "",                       "ITALIC")
-call s:hi("typescriptPromiseMethod",           s:cterm.blue_bright,      "",                       "")
-call s:hi("typescriptIdentifier",              s:cterm.red_bright,       "",                       "")
-call s:hi("typescriptCase",                    s:cterm.magenta_bright,   "",                       "")
-call s:hi("typescriptDefault",                 s:cterm.magenta_bright,   "",                       "")
-call s:hi("typescriptClassKeyword",            s:cterm.yellow_dim,       "",                       "")
-call s:hi("typescriptClassName",               s:cterm.red_bright,       "",                       "BOLD")
-call s:hi("typescriptClassHeritage",           s:cterm.magenta_dim,      "",                       "BOLD")
-call s:hi("typescriptClassExtends",            s:cterm.blue_bright,      "",                       "")
-call s:hi("typescriptIndexExpr",               s:cterm.white_dim,        "",                       "")
-call s:hi("typescriptForOperator",             s:cterm.blue_bright,      "",                       "")
-call s:hi("typescriptRepeat",                  s:cterm.blue_dim,         "",                       "")
-call s:hi("typescriptNodeGlobal",              s:cterm.blue_dim,         "",                       "")
-call s:hi("typescriptBOMNavigatorProp",        s:cterm.blue_dim,         "",                       "")
-call s:hi("typescriptBOMWindowProp",           s:cterm.blue_dim,         "",                       "")
-call s:hi("typescriptDOMFormProp",             s:cterm.blue_dim,         "",                       "")
-call s:hi("typescriptDOMDocMethod",            s:cterm.blue_dim,         "",                       "")
-call s:hi("typescriptArrayStaticMethod",       s:cterm.blue_dim,         "",                       "")
-call s:hi("typescriptArrayMethod",             s:cterm.blue_dim,         "",                       "")
-call s:hi("typescriptJSONStaticMethod",        s:cterm.blue_dim,         "",                       "")
-call s:hi("typescriptStringMethod",            s:cterm.blue_dim,         "",                       "")
-call s:hi("typescriptHeadersMethod",           s:cterm.blue_dim,         "",                       "")
-call s:hi("typescriptGlobalMethod",            s:cterm.blue_dim,         "",                       "")
-
-" TSX/JSX
-call s:hi("jsxOpenPunct",                      s:cterm.yellow_dim,       "",                       "")
-call s:hi("jsxClosePunct",                     s:cterm.yellow_dim,       "",                       "")
-call s:hi("jsxCloseString",                    s:cterm.yellow_dim,       "",                       "")
-call s:hi("jsxTagName",                        s:cterm.cyan_bright,      "",                       "")
-call s:hi("jsxComponentName",                  s:cterm.cyan_bright,      "",                       "BOLD")
-call s:hi("jsxAttrib",                         s:cterm.magenta_dim,      "",                       "ITALIC")
-call s:hi("jsxElement",                        s:cterm.blue_bright,      "",                       "")
-call s:hi("jsxString",                         s:cterm.green_dim,        "",                       "")
-call s:hi("jsxBraces",                         s:cterm.cyan_dim,         "",                       "")
-
-" HTML colors
-call s:hi("htmlTag",                           s:cterm.cyan_bright,      "",                       "")
-call s:hi("htmlEndTag",                        s:cterm.cyan_bright,      "",                       "")
-call s:hi("htmlTagName",                       s:cterm.magenta_bright,   "",                       "")
-call s:hi("htmlSpecialTagName",                s:cterm.green_bright,     "",                       "")
-call s:hi("htmlArg",                           s:cterm.yellow_bright,    "",                       "")
-
-" XML
-call s:hi("xmlTag",                            s:cterm.cyan_bright,      "",                       "")
-call s:hi("xmlEndTag",                         s:cterm.cyan_bright,      "",                       "")
-call s:hi("xmlTagName",                        s:cterm.magenta_bright,   "",                       "")
-call s:hi("xmlAttrib",                         s:cterm.yellow_bright,    "",                       "")
-
-" VIM
-call s:hi("vimString",                         s:cterm.green_dim,        "",                       "")
-call s:hi("vimCommand",                        s:cterm.magenta_bright,   "",                       "")
-call s:hi("vimParenSep",                       s:cterm.cyan_bright,      "",                       "")
-call s:hi("vimUserFunc",                       s:cterm.white_bright,     "",                       "")
-call s:hi("vimLineComment",                    s:cterm.black,            "",                       "BOLD,ITALIC")
-
-" Shell
-call s:hi("shSetList",                         s:cterm.green_bright,     "",                       "")
-call s:hi("shTestOpr",                         s:cterm.blue_bright,      "",                       "")
-call s:hi("shNumber",                          s:cterm.yellow_bright,    "",                       "")
-call s:hi("shConditional",                     s:cterm.cyan_bright,      "",                       "")
-
-" NERDTree
-call s:hi("NERDTreeOpenable",                  s:cterm.black,            s:cterm.none,             "")
-call s:hi("NERDTreeClosable",                  s:cterm.black,            s:cterm.none,             "")
-call s:hi("NERDTreeCWD",                       s:cterm.yellow_dim,       s:cterm.none,             "")
-call s:hi("NERDTreeDir",                       s:cterm.black,            s:cterm.none,             "BOLD")
-call s:hi("NERDTreeDirSlash",                  s:cterm.background,       s:cterm.none,             "")
-call s:hi("NERDTreeExecFile",                  s:cterm.blue_bright,      s:cterm.none,             "")
-
-function! NERDTreeHighlightFile(extension, ctermfg, ctermbg)
-    exec "autocmd filetype nerdtree syn match " . a:extension . ' #^\s\+.*' . a:extension . "$#"
-    exec "autocmd filetype nerdtree highlight " . a:extension . " ctermbg=" . s:cterm(a:ctermbg) . " ctermfg=" . s:cterm(a:ctermfg)
+  if a:guifg != ""
+    exec "hi " . a:group . " guifg=#" . a:guifg
+  endif
+  if a:guibg != ""
+    exec "hi " . a:group . " guibg=#" . a:guibg
+  endif
+  if a:ctermfg != ""
+    exec "hi " . a:group . " ctermfg=" . a:ctermfg
+  endif
+  if a:ctermbg != ""
+    exec "hi " . a:group . " ctermbg=" . a:ctermbg
+  endif
+  if l:attr != ""
+    exec "hi " . a:group . " gui=" . l:attr . " cterm=" . l:attr
+  endif
+  if l:guisp != ""
+    exec "hi " . a:group . " guisp=#" . l:guisp
+  endif
 endfunction
 
-call NERDTreeHighlightFile("ts",               s:cterm.cyan_bright,      s:cterm.none)
-call NERDTreeHighlightFile("tsx",              s:cterm.cyan_bright,      s:cterm.none)
-call NERDTreeHighlightFile("conf",             s:cterm.cyan_dim,         s:cterm.none)
-call NERDTreeHighlightFile("config",           s:cterm.cyan_dim,         s:cterm.none)
-call NERDTreeHighlightFile("yml",              s:cterm.cyan_dim,         s:cterm.none)
 
-call NERDTreeHighlightFile("js",               s:cterm.yellow_bright,    s:cterm.none)
-call NERDTreeHighlightFile("jsx",              s:cterm.yellow_bright,    s:cterm.none)
-call NERDTreeHighlightFile("json",             s:cterm.yellow_dim,       s:cterm.none)
+fun <sid>hi(group, guifg, guibg, ctermfg, ctermbg, attr, guisp)
+  call g:Base16hi(a:group, a:guifg, a:guibg, a:ctermfg, a:ctermbg, a:attr, a:guisp)
+endfun
 
-call NERDTreeHighlightFile("css",              s:cterm.green_bright,     s:cterm.none)
-call NERDTreeHighlightFile("scss",             s:cterm.green_bright,     s:cterm.none)
-call NERDTreeHighlightFile("less",             s:cterm.green_bright,     s:cterm.none)
-call NERDTreeHighlightFile("html",             s:cterm.green_dim,        s:cterm.none)
-call NERDTreeHighlightFile("xml",              s:cterm.green_dim,        s:cterm.none)
-call NERDTreeHighlightFile("md",               s:cterm.green_dim,        s:cterm.none)
-call NERDTreeHighlightFile("vim",              s:cterm.green_dim,        s:cterm.none)
+" Vim editor colors
+call <sid>hi("Normal",        s:gui05, s:gui00, s:cterm05, s:cterm00, "", "")
+call <sid>hi("Bold",          "", "", "", "", "bold", "")
+call <sid>hi("Debug",         s:gui08, "", s:cterm08, "", "", "")
+call <sid>hi("Directory",     s:gui0D, "", s:cterm0D, "", "", "")
+call <sid>hi("Error",         s:gui00, s:gui08, s:cterm00, s:cterm08, "", "")
+call <sid>hi("ErrorMsg",      s:gui08, s:gui00, s:cterm08, s:cterm00, "", "")
+call <sid>hi("Exception",     s:gui08, "", s:cterm08, "", "", "")
+call <sid>hi("FoldColumn",    s:gui0C, s:gui01, s:cterm0C, s:cterm01, "", "")
+call <sid>hi("Folded",        s:gui03, s:gui01, s:cterm03, s:cterm01, "", "")
+call <sid>hi("IncSearch",     s:gui01, s:gui09, s:cterm01, s:cterm09, "none", "")
+call <sid>hi("Italic",        "", "", "", "", "none", "")
+call <sid>hi("Macro",         s:gui08, "", s:cterm08, "", "", "")
+call <sid>hi("MatchParen",    "", s:gui03, "", s:cterm03,  "", "")
+call <sid>hi("ModeMsg",       s:gui0B, "", s:cterm0B, "", "", "")
+call <sid>hi("MoreMsg",       s:gui0B, "", s:cterm0B, "", "", "")
+call <sid>hi("Question",      s:gui0D, "", s:cterm0D, "", "", "")
+call <sid>hi("Search",        s:gui01, s:gui0A, s:cterm01, s:cterm0A,  "", "")
+call <sid>hi("Substitute",    s:gui01, s:gui0A, s:cterm01, s:cterm0A, "none", "")
+call <sid>hi("SpecialKey",    s:gui03, "", s:cterm03, "", "", "")
+call <sid>hi("TooLong",       s:gui08, "", s:cterm08, "", "", "")
+call <sid>hi("Underlined",    s:gui08, "", s:cterm08, "", "", "")
+call <sid>hi("Visual",        "", s:gui02, "", s:cterm02, "", "")
+call <sid>hi("VisualNOS",     s:gui08, "", s:cterm08, "", "", "")
+call <sid>hi("WarningMsg",    s:gui08, "", s:cterm08, "", "", "")
+call <sid>hi("WildMenu",      s:gui08, s:gui0A, s:cterm08, "", "", "")
+call <sid>hi("Title",         s:gui0D, "", s:cterm0D, "", "none", "")
+call <sid>hi("Conceal",       s:gui0D, s:gui00, s:cterm0D, s:cterm00, "", "")
+call <sid>hi("Cursor",        s:gui00, s:gui05, s:cterm00, s:cterm05, "", "")
+call <sid>hi("NonText",       s:gui00, "", s:cterm00, "", "", "")
+call <sid>hi("LineNr",        s:gui03, s:gui00, s:cterm03, s:cterm01, "", "")
+call <sid>hi("SignColumn",    s:gui03, s:gui01, s:cterm03, s:cterm01, "", "")
+call <sid>hi("StatusLine",    s:gui04, s:gui02, s:cterm04, s:cterm02, "none", "")
+call <sid>hi("StatusLineNC",  s:gui03, s:gui01, s:cterm03, s:cterm01, "none", "")
+call <sid>hi("VertSplit",     s:gui02, s:gui02, s:cterm02, s:cterm02, "none", "")
+call <sid>hi("ColorColumn",   "", s:gui01, "", s:cterm01, "none", "")
+call <sid>hi("CursorColumn",  "", s:gui01, "", s:cterm01, "none", "")
+call <sid>hi("CursorLine",    "", s:gui01, "", s:cterm01, "none", "")
+call <sid>hi("CursorLineNr",  s:gui04, s:gui00, s:cterm04, s:cterm01, "", "")
+call <sid>hi("QuickFixLine",  "", s:gui01, "", s:cterm01, "none", "")
+call <sid>hi("PMenu",         s:gui05, s:gui01, s:cterm05, s:cterm01, "none", "")
+call <sid>hi("PMenuSel",      s:gui01, s:gui05, s:cterm01, s:cterm05, "", "")
+call <sid>hi("TabLine",       s:gui03, s:gui01, s:cterm03, s:cterm01, "none", "")
+call <sid>hi("TabLineFill",   s:gui03, s:gui01, s:cterm03, s:cterm01, "none", "")
+call <sid>hi("TabLineSel",    s:gui0B, s:gui01, s:cterm0B, s:cterm01, "none", "")
 
-call NERDTreeHighlightFile("dockerignore",     s:cterm.black,            s:cterm.none)
-call NERDTreeHighlightFile("gitignore",        s:cterm.black,            s:cterm.none)
-call NERDTreeHighlightFile("eslint",           s:cterm.black,            s:cterm.none)
-call NERDTreeHighlightFile("babelrc",          s:cterm.black,            s:cterm.none)
+" Standard syntax highlighting
+call <sid>hi("Boolean",      s:gui09, "", s:cterm09, "", "", "")
+call <sid>hi("Character",    s:gui08, "", s:cterm08, "", "", "")
+call <sid>hi("Comment",      s:gui03, "", s:cterm03, "", "", "")
+call <sid>hi("Conditional",  s:gui0E, "", s:cterm0E, "", "", "")
+call <sid>hi("Constant",     s:gui09, "", s:cterm09, "", "", "")
+call <sid>hi("Define",       s:gui0E, "", s:cterm0E, "", "none", "")
+call <sid>hi("Delimiter",    s:gui0F, "", s:cterm0F, "", "", "")
+call <sid>hi("Float",        s:gui09, "", s:cterm09, "", "", "")
+call <sid>hi("Function",     s:gui0D, "", s:cterm0D, "", "", "")
+call <sid>hi("Identifier",   s:gui08, "", s:cterm08, "", "none", "")
+call <sid>hi("Include",      s:gui0D, "", s:cterm0D, "", "", "")
+call <sid>hi("Keyword",      s:gui0E, "", s:cterm0E, "", "", "")
+call <sid>hi("Label",        s:gui0A, "", s:cterm0A, "", "", "")
+call <sid>hi("Number",       s:gui09, "", s:cterm09, "", "", "")
+call <sid>hi("Operator",     s:gui05, "", s:cterm05, "", "none", "")
+call <sid>hi("PreProc",      s:gui0A, "", s:cterm0A, "", "", "")
+call <sid>hi("Repeat",       s:gui0A, "", s:cterm0A, "", "", "")
+call <sid>hi("Special",      s:gui0C, "", s:cterm0C, "", "", "")
+call <sid>hi("SpecialChar",  s:gui0F, "", s:cterm0F, "", "", "")
+call <sid>hi("Statement",    s:gui08, "", s:cterm08, "", "", "")
+call <sid>hi("StorageClass", s:gui0A, "", s:cterm0A, "", "", "")
+call <sid>hi("String",       s:gui0B, "", s:cterm0B, "", "", "")
+call <sid>hi("Structure",    s:gui0E, "", s:cterm0E, "", "", "")
+call <sid>hi("Tag",          s:gui0A, "", s:cterm0A, "", "", "")
+call <sid>hi("Todo",         s:gui0A, s:gui01, s:cterm0A, s:cterm01, "", "")
+call <sid>hi("Type",         s:gui0A, "", s:cterm0A, "", "none", "")
+call <sid>hi("Typedef",      s:gui0A, "", s:cterm0A, "", "", "")
 
-call NERDTreeHighlightFile("sh",               s:cterm.blue_bright,      s:cterm.none)
-call NERDTreeHighlightFile("lua",              s:cterm.blue_dim,         s:cterm.none)
-call NERDTreeHighlightFile("php",              s:cterm.blue_dim,         s:cterm.none)
+" C highlighting
+call <sid>hi("cOperator",   s:gui0C, "", s:cterm0C, "", "", "")
+call <sid>hi("cPreCondit",  s:gui0E, "", s:cterm0E, "", "", "")
 
-call NERDTreeHighlightFile("jpg",              s:cterm.white_dim,        s:cterm.none)
-call NERDTreeHighlightFile("png",              s:cterm.white_dim,        s:cterm.none)
-call NERDTreeHighlightFile("svg",              s:cterm.white_dim,        s:cterm.none)
+" C# highlighting
+call <sid>hi("csClass",                 s:gui0A, "", s:cterm0A, "", "", "")
+call <sid>hi("csAttribute",             s:gui0A, "", s:cterm0A, "", "", "")
+call <sid>hi("csModifier",              s:gui0E, "", s:cterm0E, "", "", "")
+call <sid>hi("csType",                  s:gui08, "", s:cterm08, "", "", "")
+call <sid>hi("csUnspecifiedStatement",  s:gui0D, "", s:cterm0D, "", "", "")
+call <sid>hi("csContextualStatement",   s:gui0E, "", s:cterm0E, "", "", "")
+call <sid>hi("csNewDecleration",        s:gui08, "", s:cterm08, "", "", "")
+
+" CSS highlighting
+call <sid>hi("cssBraces",      s:gui05, "", s:cterm05, "", "", "")
+call <sid>hi("cssClassName",   s:gui0E, "", s:cterm0E, "", "", "")
+call <sid>hi("cssColor",       s:gui0C, "", s:cterm0C, "", "", "")
+
+" Diff highlighting
+call <sid>hi("DiffAdd",      s:gui0B, s:gui01,  s:cterm0B, s:cterm01, "", "")
+call <sid>hi("DiffChange",   s:gui03, s:gui01,  s:cterm03, s:cterm01, "", "")
+call <sid>hi("DiffDelete",   s:gui08, s:gui01,  s:cterm08, s:cterm01, "", "")
+call <sid>hi("DiffText",     s:gui0D, s:gui01,  s:cterm0D, s:cterm01, "", "")
+call <sid>hi("DiffAdded",    s:gui0B, s:gui00,  s:cterm0B, s:cterm00, "", "")
+call <sid>hi("DiffFile",     s:gui08, s:gui00,  s:cterm08, s:cterm00, "", "")
+call <sid>hi("DiffNewFile",  s:gui0B, s:gui00,  s:cterm0B, s:cterm00, "", "")
+call <sid>hi("DiffLine",     s:gui0D, s:gui00,  s:cterm0D, s:cterm00, "", "")
+call <sid>hi("DiffRemoved",  s:gui08, s:gui00,  s:cterm08, s:cterm00, "", "")
+
+" Git highlighting
+call <sid>hi("gitcommitOverflow",       s:gui08, "", s:cterm08, "", "", "")
+call <sid>hi("gitcommitSummary",        s:gui0B, "", s:cterm0B, "", "", "")
+call <sid>hi("gitcommitComment",        s:gui03, "", s:cterm03, "", "", "")
+call <sid>hi("gitcommitUntracked",      s:gui03, "", s:cterm03, "", "", "")
+call <sid>hi("gitcommitDiscarded",      s:gui03, "", s:cterm03, "", "", "")
+call <sid>hi("gitcommitSelected",       s:gui03, "", s:cterm03, "", "", "")
+call <sid>hi("gitcommitHeader",         s:gui0E, "", s:cterm0E, "", "", "")
+call <sid>hi("gitcommitSelectedType",   s:gui0D, "", s:cterm0D, "", "", "")
+call <sid>hi("gitcommitUnmergedType",   s:gui0D, "", s:cterm0D, "", "", "")
+call <sid>hi("gitcommitDiscardedType",  s:gui0D, "", s:cterm0D, "", "", "")
+call <sid>hi("gitcommitBranch",         s:gui09, "", s:cterm09, "", "bold", "")
+call <sid>hi("gitcommitUntrackedFile",  s:gui0A, "", s:cterm0A, "", "", "")
+call <sid>hi("gitcommitUnmergedFile",   s:gui08, "", s:cterm08, "", "bold", "")
+call <sid>hi("gitcommitDiscardedFile",  s:gui08, "", s:cterm08, "", "bold", "")
+call <sid>hi("gitcommitSelectedFile",   s:gui0B, "", s:cterm0B, "", "bold", "")
+
+" GitGutter highlighting
+call <sid>hi("GitGutterAdd",     s:gui0B, s:gui01, s:cterm0B, s:cterm01, "", "")
+call <sid>hi("GitGutterChange",  s:gui0D, s:gui01, s:cterm0D, s:cterm01, "", "")
+call <sid>hi("GitGutterDelete",  s:gui08, s:gui01, s:cterm08, s:cterm01, "", "")
+call <sid>hi("GitGutterChangeDelete",  s:gui0E, s:gui01, s:cterm0E, s:cterm01, "", "")
+
+" HTML highlighting
+call <sid>hi("htmlBold",    s:gui0A, "", s:cterm0A, "", "", "")
+call <sid>hi("htmlItalic",  s:gui0E, "", s:cterm0E, "", "", "")
+call <sid>hi("htmlEndTag",  s:gui05, "", s:cterm05, "", "", "")
+call <sid>hi("htmlTag",     s:gui05, "", s:cterm05, "", "", "")
+
+" JavaScript highlighting
+call <sid>hi("javaScript",        s:gui05, "", s:cterm05, "", "", "")
+call <sid>hi("javaScriptBraces",  s:gui05, "", s:cterm05, "", "", "")
+call <sid>hi("javaScriptNumber",  s:gui09, "", s:cterm09, "", "", "")
+" pangloss/vim-javascript highlighting
+call <sid>hi("jsOperator",          s:gui0D, "", s:cterm0D, "", "", "")
+call <sid>hi("jsStatement",         s:gui0E, "", s:cterm0E, "", "", "")
+call <sid>hi("jsReturn",            s:gui0E, "", s:cterm0E, "", "", "")
+call <sid>hi("jsThis",              s:gui08, "", s:cterm08, "", "", "")
+call <sid>hi("jsClassDefinition",   s:gui0A, "", s:cterm0A, "", "", "")
+call <sid>hi("jsFunction",          s:gui0E, "", s:cterm0E, "", "", "")
+call <sid>hi("jsFuncName",          s:gui0D, "", s:cterm0D, "", "", "")
+call <sid>hi("jsFuncCall",          s:gui0D, "", s:cterm0D, "", "", "")
+call <sid>hi("jsClassFuncName",     s:gui0D, "", s:cterm0D, "", "", "")
+call <sid>hi("jsClassMethodType",   s:gui0E, "", s:cterm0E, "", "", "")
+call <sid>hi("jsRegexpString",      s:gui0C, "", s:cterm0C, "", "", "")
+call <sid>hi("jsGlobalObjects",     s:gui0A, "", s:cterm0A, "", "", "")
+call <sid>hi("jsGlobalNodeObjects", s:gui0A, "", s:cterm0A, "", "", "")
+call <sid>hi("jsExceptions",        s:gui0A, "", s:cterm0A, "", "", "")
+call <sid>hi("jsBuiltins",          s:gui0A, "", s:cterm0A, "", "", "")
+
+" Mail highlighting
+call <sid>hi("mailQuoted1",  s:gui0A, "", s:cterm0A, "", "", "")
+call <sid>hi("mailQuoted2",  s:gui0B, "", s:cterm0B, "", "", "")
+call <sid>hi("mailQuoted3",  s:gui0E, "", s:cterm0E, "", "", "")
+call <sid>hi("mailQuoted4",  s:gui0C, "", s:cterm0C, "", "", "")
+call <sid>hi("mailQuoted5",  s:gui0D, "", s:cterm0D, "", "", "")
+call <sid>hi("mailQuoted6",  s:gui0A, "", s:cterm0A, "", "", "")
+call <sid>hi("mailURL",      s:gui0D, "", s:cterm0D, "", "", "")
+call <sid>hi("mailEmail",    s:gui0D, "", s:cterm0D, "", "", "")
+
+" Markdown highlighting
+call <sid>hi("markdownCode",              s:gui0B, "", s:cterm0B, "", "", "")
+call <sid>hi("markdownError",             s:gui05, s:gui00, s:cterm05, s:cterm00, "", "")
+call <sid>hi("markdownCodeBlock",         s:gui0B, "", s:cterm0B, "", "", "")
+call <sid>hi("markdownHeadingDelimiter",  s:gui0D, "", s:cterm0D, "", "", "")
+
+" NERDTree highlighting
+call <sid>hi("NERDTreeDirSlash",  s:gui0D, "", s:cterm0D, "", "", "")
+call <sid>hi("NERDTreeExecFile",  s:gui05, "", s:cterm05, "", "", "")
+
+" PHP highlighting
+call <sid>hi("phpMemberSelector",  s:gui05, "", s:cterm05, "", "", "")
+call <sid>hi("phpComparison",      s:gui05, "", s:cterm05, "", "", "")
+call <sid>hi("phpParent",          s:gui05, "", s:cterm05, "", "", "")
+call <sid>hi("phpMethodsVar",      s:gui0C, "", s:cterm0C, "", "", "")
+
+" Python highlighting
+call <sid>hi("pythonOperator",  s:gui0E, "", s:cterm0E, "", "", "")
+call <sid>hi("pythonRepeat",    s:gui0E, "", s:cterm0E, "", "", "")
+call <sid>hi("pythonInclude",   s:gui0E, "", s:cterm0E, "", "", "")
+call <sid>hi("pythonStatement", s:gui0E, "", s:cterm0E, "", "", "")
+
+" Ruby highlighting
+call <sid>hi("rubyAttribute",               s:gui0D, "", s:cterm0D, "", "", "")
+call <sid>hi("rubyConstant",                s:gui0A, "", s:cterm0A, "", "", "")
+call <sid>hi("rubyInterpolationDelimiter",  s:gui0F, "", s:cterm0F, "", "", "")
+call <sid>hi("rubyRegexp",                  s:gui0C, "", s:cterm0C, "", "", "")
+call <sid>hi("rubySymbol",                  s:gui0B, "", s:cterm0B, "", "", "")
+call <sid>hi("rubyStringDelimiter",         s:gui0B, "", s:cterm0B, "", "", "")
+
+" SASS highlighting
+call <sid>hi("sassidChar",     s:gui08, "", s:cterm08, "", "", "")
+call <sid>hi("sassClassChar",  s:gui09, "", s:cterm09, "", "", "")
+call <sid>hi("sassInclude",    s:gui0E, "", s:cterm0E, "", "", "")
+call <sid>hi("sassMixing",     s:gui0E, "", s:cterm0E, "", "", "")
+call <sid>hi("sassMixinName",  s:gui0D, "", s:cterm0D, "", "", "")
+
+" Signify highlighting
+call <sid>hi("SignifySignAdd",     s:gui0B, s:gui01, s:cterm0B, s:cterm01, "", "")
+call <sid>hi("SignifySignChange",  s:gui0D, s:gui01, s:cterm0D, s:cterm01, "", "")
+call <sid>hi("SignifySignDelete",  s:gui08, s:gui01, s:cterm08, s:cterm01, "", "")
+
+" Spelling highlighting
+call <sid>hi("SpellBad",     "", "", "", "", "undercurl", s:gui08)
+call <sid>hi("SpellLocal",   "", "", "", "", "undercurl", s:gui0C)
+call <sid>hi("SpellCap",     "", "", "", "", "undercurl", s:gui0D)
+call <sid>hi("SpellRare",    "", "", "", "", "undercurl", s:gui0E)
+
+" Startify highlighting
+call <sid>hi("StartifyBracket",  s:gui03, "", s:cterm03, "", "", "")
+call <sid>hi("StartifyFile",     s:gui07, "", s:cterm07, "", "", "")
+call <sid>hi("StartifyFooter",   s:gui03, "", s:cterm03, "", "", "")
+call <sid>hi("StartifyHeader",   s:gui0B, "", s:cterm0B, "", "", "")
+call <sid>hi("StartifyNumber",   s:gui09, "", s:cterm09, "", "", "")
+call <sid>hi("StartifyPath",     s:gui03, "", s:cterm03, "", "", "")
+call <sid>hi("StartifySection",  s:gui0E, "", s:cterm0E, "", "", "")
+call <sid>hi("StartifySelect",   s:gui0C, "", s:cterm0C, "", "", "")
+call <sid>hi("StartifySlash",    s:gui03, "", s:cterm03, "", "", "")
+call <sid>hi("StartifySpecial",  s:gui03, "", s:cterm03, "", "", "")
+
+" Java highlighting
+call <sid>hi("javaOperator",     s:gui0D, "", s:cterm0D, "", "", "")
+
+" Remove functions
+delf <sid>hi
+
+" Remove color variables
+unlet s:gui00 s:gui01 s:gui02 s:gui03  s:gui04  s:gui05  s:gui06  s:gui07  s:gui08  s:gui09 s:gui0A  s:gui0B  s:gui0C  s:gui0D  s:gui0E  s:gui0F
+unlet s:cterm00 s:cterm01 s:cterm02 s:cterm03 s:cterm04 s:cterm05 s:cterm06 s:cterm07 s:cterm08 s:cterm09 s:cterm0A s:cterm0B s:cterm0C s:cterm0D s:cterm0E s:cterm0F
